@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="./src/public/logo.png" alt="Logo WZ Cortes" width="200"/>
+  <img src="./public/logo.png" alt="Logo WZ Cortes" width="200"/>
 </p>
 
 <h1 align="center">WZ Cortes</h1>
