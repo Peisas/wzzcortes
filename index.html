@@ -18,7 +18,6 @@
       color: #fff;
     }
 
-    /* HEADER */
     header {
       background: #0b2a4a;
       padding: 15px 20px;
@@ -27,17 +26,18 @@
       justify-content: space-between;
     }
 
-    header .logo {
+    .logo {
       display: flex;
       align-items: center;
       gap: 10px;
       font-weight: bold;
     }
 
-    header .logo img {
-      width: 36px;
-      height: 36px;
+    .logo img {
+      width: 38px;
+      height: 38px;
       border-radius: 50%;
+      object-fit: cover;
     }
 
     header a {
@@ -50,15 +50,14 @@
       font-size: 14px;
     }
 
-    /* HERO */
     .hero {
       text-align: center;
-      padding: 70px 20px 50px;
+      padding: 60px 20px 40px;
     }
 
     .hero h1 {
       font-size: 28px;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
     }
 
     .hero h1 span {
@@ -69,21 +68,35 @@
       opacity: 0.8;
       font-size: 14px;
       max-width: 420px;
-      margin: 0 auto 25px;
+      margin: 0 auto 20px;
     }
 
+    .hero select,
     .hero button {
+      width: 100%;
+      max-width: 320px;
+      margin: 10px auto;
+      display: block;
+    }
+
+    select {
+      padding: 12px;
+      border-radius: 8px;
+      border: none;
+      font-size: 15px;
+    }
+
+    button {
       background: #f5c542;
       color: #000;
       border: none;
-      padding: 14px 24px;
+      padding: 14px;
       border-radius: 10px;
       font-size: 16px;
       font-weight: bold;
       cursor: pointer;
     }
 
-    /* SERVIÇOS */
     section {
       padding: 40px 20px;
       background: #0b2a4a;
@@ -116,16 +129,8 @@
     .card p {
       font-size: 13px;
       opacity: 0.8;
-      margin-bottom: 8px;
     }
 
-    .tempo {
-      font-size: 12px;
-      color: #f5c542;
-      font-weight: bold;
-    }
-
-    /* FOOTER */
     footer {
       text-align: center;
       padding: 20px;
@@ -136,72 +141,95 @@
 </head>
 <body>
 
-  <!-- HEADER -->
-  <header>
-    <div class="logo">
-      <img src="https://i.imgur.com/8Km9tLL.png" alt="Logo">
-      <span>WZ CORTE</span>
-    </div>
-
-    <a href="https://api.whatsapp.com/send?phone=5584987716386">
-      WhatsApp
-    </a>
-  </header>
-
-  <!-- HERO -->
-  <div class="hero">
-    <h1>Estilo que chama <span>atenção</span></h1>
-    <p>
-      Cortes modernos, atendimento de qualidade e visual profissional.
-      Agende seu horário agora mesmo.
-    </p>
-
-    <button onclick="agendar()">Agendar Corte</button>
+<header>
+  <div class="logo">
+    <img src="assets/logo.png" alt="Logo WZ Corte">
+    <span>WZ CORTE</span>
   </div>
 
-  <!-- SERVIÇOS -->
-  <section>
-    <h2>Serviços</h2>
+  <a href="https://api.whatsapp.com/send?phone=5584987716386">
+    WhatsApp
+  </a>
+</header>
 
-    <div class="cards">
-      <div class="card">
-        <h3>Cortes em geral</h3>
-        <p>Low fade, taper, high fade, degradê, social e sobrancelha.</p>
-        <div class="tempo">⏱ 30 minutos</div>
-      </div>
+<div class="hero">
+  <h1>Estilo que chama <span>atenção</span></h1>
+  <p>Escolha o serviço abaixo e agende seu horário agora mesmo.</p>
 
-      <div class="card">
-        <h3>Corte + Barba</h3>
-        <p>Alinhamento completo e acabamento profissional.</p>
-        <div class="tempo">⏱ 45 minutos</div>
-      </div>
+  <select id="servico">
+    <option value="">-- Selecione o serviço --</option>
 
-      <div class="card">
-        <h3>Químicas</h3>
-        <p>Nevou, pigmentação, colorimetria, reflexo e luzes.</p>
-        <div class="tempo">⏱ 1h40min</div>
-      </div>
+    <option data-preco="R$ 25,00" data-tempo="30 min">
+      Corte em geral (Low / Taper / High / Degradê / Social)
+    </option>
+
+    <option data-preco="R$ 30,00" data-tempo="30 min">
+      Corte + Sobrancelha
+    </option>
+
+    <option data-preco="R$ 40,00" data-tempo="45 min">
+      Corte + Barba
+    </option>
+
+    <option data-preco="A partir de R$ 80,00" data-tempo="1h40">
+      Químicas (Nevou, Luzes, Pigmentação)
+    </option>
+  </select>
+
+  <button onclick="agendar()">Agendar no WhatsApp</button>
+</div>
+
+<section>
+  <h2>Serviços</h2>
+
+  <div class="cards">
+    <div class="card">
+      <h3>Cortes</h3>
+      <p>Low fade, taper fade, high fade, degradê e social.</p>
     </div>
-  </section>
 
-  <!-- FOOTER -->
-  <footer>
-    © 2026 • WZ Corte • Todos os direitos reservados
-  </footer>
+    <div class="card">
+      <h3>Barba</h3>
+      <p>Alinhamento e acabamento profissional.</p>
+    </div>
 
-  <script>
-    function agendar() {
-      const telefone = "5584987716386";
-      const mensagem =
-        "Olá! Gostaria de agendar um horário na WZ Corte.";
+    <div class="card">
+      <h3>Químicas</h3>
+      <p>Nevou, pigmentação, colorimetria, reflexo e luzes.</p>
+    </div>
+  </div>
+</section>
 
-      window.location.href =
-        "https://api.whatsapp.com/send?phone=" +
-        telefone +
-        "&text=" +
-        encodeURIComponent(mensagem);
+<footer>
+  © 2026 • WZ Corte • Todos os direitos reservados
+</footer>
+
+<script>
+  function agendar() {
+    const select = document.getElementById("servico");
+    const servico = select.value;
+    const preco = select.options[select.selectedIndex].getAttribute("data-preco");
+    const tempo = select.options[select.selectedIndex].getAttribute("data-tempo");
+
+    if (!servico) {
+      alert("Selecione um serviço antes de agendar.");
+      return;
     }
-  </script>
+
+    const telefone = "5584987716386";
+    const mensagem =
+      `Olá! Gostaria de agendar um horário.\n\n` +
+      `Serviço: ${servico}\n` +
+      `Tempo: ${tempo}\n` +
+      `Valor: ${preco}`;
+
+    window.location.href =
+      "https://api.whatsapp.com/send?phone=" +
+      telefone +
+      "&text=" +
+      encodeURIComponent(mensagem);
+  }
+</script>
 
 </body>
 </html>
