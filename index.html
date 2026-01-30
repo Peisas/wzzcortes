@@ -16,112 +16,111 @@
       theme: {
         extend: {
           fontFamily: {
-            poppins: ['Poppins', 'sans-serif'],
-          },
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WZ Corte</title>
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
           colors: {
-            dark: '#0F0F0F',
-            green: '#00FF88',
-            darkgray: '#1F1F1F',
+            azul: "#0A2540",
+            azulClaro: "#1E90FF",
+            amarelo: "#FFC93C",
+            fundo: "#020617"
           }
         }
       }
     }
-
-    function agendarWhatsApp() {
-      const select = document.getElementById("servico");
-      const servico = select.value;
-
-      if (!servico) {
-        alert("Por favor, selecione um serviço 👇");
-        return;
-      }
-
-      const mensagem = `Olá! Quero agendar um horário.\n\n✂️ Serviço escolhido:\n${servico}`;
-      const url = `https://wa.me/5584999806570?text=${encodeURIComponent(mensagem)}`;
-
-      window.open(url, "_blank");
-    }
   </script>
 </head>
 
-<body class="bg-dark text-white font-poppins">
+<body class="bg-fundo text-white font-sans">
+
+  <!-- HEADER -->
+  <header class="flex items-center justify-between px-6 py-4 bg-azul shadow-lg">
+
+    <!-- LOGO + NOME -->
+    <div class="flex items-center gap-3">
+      <img 
+        src="./assets/img/logo.png"
+        alt="Logo WZ Corte"
+        class="w-14 h-14 rounded-full object-cover border-2 border-amarelo shadow-lg"
+      />
+      <span class="font-extrabold text-lg tracking-wide">
+        WZ <span class="text-amarelo">CORTE</span>
+      </span>
+    </div>
+
+    <!-- BOTÃO WHATSAPP -->
+    <a
+      href="https://wa.me/558487716386?text=Olá,%20vim%20pelo%20seu%20site!"
+      target="_blank"
+      class="bg-amarelo text-azul font-bold px-4 py-2 rounded-lg hover:scale-105 transition"
+    >
+      WhatsApp
+    </a>
+  </header>
 
   <!-- HERO -->
-  <section class="min-h-screen flex flex-col items-center justify-center text-center px-6">
-    <h1 class="text-5xl md:text-6xl font-bold text-green animate-bounce">
-      WZCortes
+  <section class="text-center py-20 px-6">
+    <h1 class="text-4xl md:text-5xl font-extrabold mb-4">
+      Estilo que chama
+      <span class="text-amarelo">atenção</span>
     </h1>
 
-    <p class="mt-4 text-lg md:text-xl max-w-xl text-gray-300">
-      Aqui o corte é na régua, o degradê é limpo e o estilo fala por você 🔥
+    <p class="text-gray-300 max-w-xl mx-auto mb-8">
+      Cortes modernos, atendimento de qualidade e visual profissional.
+      Agende seu horário agora mesmo.
     </p>
 
-    <!-- SELECT SERVIÇOS -->
-    <div class="mt-8 w-full max-w-sm">
-      <select 
-        id="servico"
-        class="w-full p-4 rounded-xl bg-darkgray text-white focus:outline-none focus:ring-2 focus:ring-green"
-      >
-        <option value="">Selecione um serviço</option>
-        <option value="Corte Degradê - R$25">Corte Degradê - R$25</option>
-        <option value="Corte Social - R$20">Corte Social - R$20</option>
-        <option value="Barba - R$15">Barba - R$15</option>
-      </select>
-
-      <button
-        onclick="agendarWhatsApp()"
-        class="mt-4 w-full bg-green text-black px-6 py-4 rounded-2xl font-semibold text-lg hover:scale-105 transition-all shadow-lg"
-      >
-        Agendar no WhatsApp
-      </button>
-    </div>
+    <a
+      href="https://wa.me/558487716386"
+      target="_blank"
+      class="inline-block bg-azulClaro px-8 py-3 rounded-lg font-bold hover:bg-amarelo hover:text-azul transition"
+    >
+      Agendar Corte
+    </a>
   </section>
 
   <!-- SERVIÇOS -->
-  <section class="bg-darkgray py-16 px-6">
-    <h2 class="text-3xl font-bold text-center text-green mb-10">
+  <section class="bg-azul px-6 py-16">
+    <h2 class="text-3xl font-bold text-center text-amarelo mb-10">
       Serviços
     </h2>
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-      
-      <div class="bg-dark p-6 rounded-2xl hover:scale-105 transition">
-        <h3 class="text-xl font-semibold text-green">Corte Degradê</h3>
-        <p class="text-gray-400 mt-2">Degradê limpo, na régua.</p>
-        <span class="block mt-4 font-bold">R$ 25,00</span>
+    <div class="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+
+      <div class="bg-fundo p-6 rounded-lg hover:scale-105 transition">
+        <h3 class="text-xl font-bold mb-2">Corte Degradê</h3>
+        <p class="text-gray-400">Moderno e bem finalizado.</p>
       </div>
 
-      <div class="bg-dark p-6 rounded-2xl hover:scale-105 transition">
-        <h3 class="text-xl font-semibold text-green">Corte Social</h3>
-        <p class="text-gray-400 mt-2">Clássico e alinhado.</p>
-        <span class="block mt-4 font-bold">R$ 20,00</span>
+      <div class="bg-fundo p-6 rounded-lg hover:scale-105 transition">
+        <h3 class="text-xl font-bold mb-2">Corte Social</h3>
+        <p class="text-gray-400">Clássico para qualquer ocasião.</p>
       </div>
 
-      <div class="bg-dark p-6 rounded-2xl hover:scale-105 transition">
-        <h3 class="text-xl font-semibold text-green">Barba</h3>
-        <p class="text-gray-400 mt-2">Barba feita com precisão.</p>
-        <span class="block mt-4 font-bold">R$ 15,00</span>
+      <div class="bg-fundo p-6 rounded-lg hover:scale-105 transition">
+        <h3 class="text-xl font-bold mb-2">Barba</h3>
+        <p class="text-gray-400">Alinhamento e acabamento profissional.</p>
       </div>
 
     </div>
   </section>
 
-  <!-- SOBRE -->
-  <section class="py-16 px-6 text-center">
-    <h2 class="text-3xl font-bold text-green mb-6">
-      Sobre a WZCortes
-    </h2>
-
-    <p class="max-w-3xl mx-auto text-gray-300">
-      A WZCortes nasceu pra elevar o nível do seu visual. Aqui o atendimento é de cria,
-      o ambiente é firmeza e o resultado é sempre daquele jeito: pesado 🔥
-    </p>
-  </section>
-
-  <!-- RODAPÉ -->
-  <footer class="bg-darkgray py-6 text-center text-gray-400 text-sm">
-    © 2026 WZCortes — Estilo, respeito e atitude ✂️
+  <!-- FOOTER -->
+  <footer class="text-center py-6 text-gray-400">
+    © 2026 • WZ Corte • Todos os direitos reservados
   </footer>
 
 </body>
+</html></body>
 </html>
