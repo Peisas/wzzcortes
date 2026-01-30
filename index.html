@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WZCortes | Barbearia</title>
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Fonte -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            poppins: ['Poppins', 'sans-serif'],
+          },
+          colors: {
+            dark: '#0F0F0F',
+            green: '#00FF88',
+            darkgray: '#1F1F1F',
+          }
+        }
+      }
+    }
+
+    function agendarWhatsApp() {
+      const select = document.getElementById("servico");
+      const servico = select.value;
+
+      if (!servico) {
+        alert("Por favor, selecione um serviço 👇");
+        return;
+      }
+
+      const mensagem = `Olá! Quero agendar um horário.\n\n✂️ Serviço escolhido:\n${servico}`;
+      const url = `https://wa.me/5584999806570?text=${encodeURIComponent(mensagem)}`;
+
+      window.open(url, "_blank");
+    }
+  </script>
+</head>
+
+<body class="bg-dark text-white font-poppins">
+
+  <!-- HERO -->
+  <section class="min-h-screen flex flex-col items-center justify-center text-center px-6">
+    <h1 class="text-5xl md:text-6xl font-bold text-green animate-bounce">
+      WZCortes
+    </h1>
+
+    <p class="mt-4 text-lg md:text-xl max-w-xl text-gray-300">
+      Aqui o corte é na régua, o degradê é limpo e o estilo fala por você 🔥
+    </p>
+
+    <!-- SELECT SERVIÇOS -->
+    <div class="mt-8 w-full max-w-sm">
+      <select 
+        id="servico"
+        class="w-full p-4 rounded-xl bg-darkgray text-white focus:outline-none focus:ring-2 focus:ring-green"
+      >
+        <option value="">Selecione um serviço</option>
+        <option value="Corte Degradê - R$25">Corte Degradê - R$25</option>
+        <option value="Corte Social - R$20">Corte Social - R$20</option>
+        <option value="Barba - R$15">Barba - R$15</option>
+      </select>
+
+      <button
+        onclick="agendarWhatsApp()"
+        class="mt-4 w-full bg-green text-black px-6 py-4 rounded-2xl font-semibold text-lg hover:scale-105 transition-all shadow-lg"
+      >
+        Agendar no WhatsApp
+      </button>
+    </div>
+  </section>
+
+  <!-- SERVIÇOS -->
+  <section class="bg-darkgray py-16 px-6">
+    <h2 class="text-3xl font-bold text-center text-green mb-10">
+      Serviços
+    </h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+      
+      <div class="bg-dark p-6 rounded-2xl hover:scale-105 transition">
+        <h3 class="text-xl font-semibold text-green">Corte Degradê</h3>
+        <p class="text-gray-400 mt-2">Degradê limpo, na régua.</p>
+        <span class="block mt-4 font-bold">R$ 25,00</span>
+      </div>
+
+      <div class="bg-dark p-6 rounded-2xl hover:scale-105 transition">
+        <h3 class="text-xl font-semibold text-green">Corte Social</h3>
+        <p class="text-gray-400 mt-2">Clássico e alinhado.</p>
+        <span class="block mt-4 font-bold">R$ 20,00</span>
+      </div>
+
+      <div class="bg-dark p-6 rounded-2xl hover:scale-105 transition">
+        <h3 class="text-xl font-semibold text-green">Barba</h3>
+        <p class="text-gray-400 mt-2">Barba feita com precisão.</p>
+        <span class="block mt-4 font-bold">R$ 15,00</span>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SOBRE -->
+  <section class="py-16 px-6 text-center">
+    <h2 class="text-3xl font-bold text-green mb-6">
+      Sobre a WZCortes
+    </h2>
+
+    <p class="max-w-3xl mx-auto text-gray-300">
+      A WZCortes nasceu pra elevar o nível do seu visual. Aqui o atendimento é de cria,
+      o ambiente é firmeza e o resultado é sempre daquele jeito: pesado 🔥
+    </p>
+  </section>
+
+  <!-- RODAPÉ -->
+  <footer class="bg-darkgray py-6 text-center text-gray-400 text-sm">
+    © 2026 WZCortes — Estilo, respeito e atitude ✂️
+  </footer>
+
+</body>
+</html>
