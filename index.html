@@ -2,125 +2,125 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>WZCortes | Barbearia</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Barbearia WZ Corte</title>
 
-  <!-- Tailwind CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #0f0f0f;
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
 
-  <!-- Fonte -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    .container {
+      background: #1a1a1a;
+      padding: 25px;
+      border-radius: 12px;
+      width: 100%;
+      max-width: 420px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 10px;
+      color: #00ff88;
+    }
+
+    p {
+      text-align: center;
+      opacity: 0.8;
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+    }
+
+    select {
+      width: 100%;
+      padding: 12px;
+      border-radius: 8px;
+      border: none;
+      outline: none;
+      font-size: 16px;
+      margin-bottom: 20px;
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      background: #00ff88;
+      color: #000;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: #00cc6f;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 15px;
+      font-size: 13px;
+      opacity: 0.6;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>WZ Corte</h1>
+    <p>Escolha seu corte e agende seu horário</p>
+
+    <label for="corte">Selecione o corte</label>
+    <select id="corte">
+      <option value="">-- Escolha um corte --</option>
+      <option value="Corte degradê">Corte degradê</option>
+      <option value="Corte social">Corte social</option>
+      <option value="Corte + barba">Corte + barba</option>
+      <option value="Barba completa">Barba completa</option>
+      <option value="Nevou">Nevou</option>
+    </select>
+
+    <button onclick="agendar()">
+      Agendar horário no WhatsApp
+    </button>
+
+    <footer>
+      © 2026 • Barbearia WZ
+    </footer>
+  </div>
 
   <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: {
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>WZ Corte</title>
+    function agendar() {
+      const corte = document.getElementById("corte").value;
 
-  <!-- Tailwind CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            azul: "#0A2540",
-            azulClaro: "#1E90FF",
-            amarelo: "#FFC93C",
-            fundo: "#020617"
-          }
-        }
+      if (corte === "") {
+        alert("Por favor, escolha um corte antes de agendar.");
+        return;
       }
+
+      const telefone = "5584999806570"; // coloque seu número aqui
+      const mensagem = `Olá! Gostaria de agendar um horário para o ${corte}.`;
+
+      const url = `https://wa.me/${telefone}?text=${encodeURIComponent(mensagem)}`;
+
+      window.open(url, "_blank");
     }
   </script>
-</head>
-
-<body class="bg-fundo text-white font-sans">
-
-  <!-- HEADER -->
-  <header class="flex items-center justify-between px-6 py-4 bg-azul shadow-lg">
-
-    <!-- LOGO + NOME -->
-    <div class="flex items-center gap-3">
-      <img 
-        src="./assets/img/logo.png"
-        alt="Logo WZ Corte"
-        class="w-14 h-14 rounded-full object-cover border-2 border-amarelo shadow-lg"
-      />
-      <span class="font-extrabold text-lg tracking-wide">
-        WZ <span class="text-amarelo">CORTE</span>
-      </span>
-    </div>
-
-    <!-- BOTÃO WHATSAPP -->
-    <a
-      href="https://wa.me/558487716386?text=Olá,%20vim%20pelo%20seu%20site!"
-      target="_blank"
-      class="bg-amarelo text-azul font-bold px-4 py-2 rounded-lg hover:scale-105 transition"
-    >
-      WhatsApp
-    </a>
-  </header>
-
-  <!-- HERO -->
-  <section class="text-center py-20 px-6">
-    <h1 class="text-4xl md:text-5xl font-extrabold mb-4">
-      Estilo que chama
-      <span class="text-amarelo">atenção</span>
-    </h1>
-
-    <p class="text-gray-300 max-w-xl mx-auto mb-8">
-      Cortes modernos, atendimento de qualidade e visual profissional.
-      Agende seu horário agora mesmo.
-    </p>
-
-    <a
-      href="https://wa.me/558487716386"
-      target="_blank"
-      class="inline-block bg-azulClaro px-8 py-3 rounded-lg font-bold hover:bg-amarelo hover:text-azul transition"
-    >
-      Agendar Corte
-    </a>
-  </section>
-
-  <!-- SERVIÇOS -->
-  <section class="bg-azul px-6 py-16">
-    <h2 class="text-3xl font-bold text-center text-amarelo mb-10">
-      Serviços
-    </h2>
-
-    <div class="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
-
-      <div class="bg-fundo p-6 rounded-lg hover:scale-105 transition">
-        <h3 class="text-xl font-bold mb-2">Corte Degradê</h3>
-        <p class="text-gray-400">Moderno e bem finalizado.</p>
-      </div>
-
-      <div class="bg-fundo p-6 rounded-lg hover:scale-105 transition">
-        <h3 class="text-xl font-bold mb-2">Corte Social</h3>
-        <p class="text-gray-400">Clássico para qualquer ocasião.</p>
-      </div>
-
-      <div class="bg-fundo p-6 rounded-lg hover:scale-105 transition">
-        <h3 class="text-xl font-bold mb-2">Barba</h3>
-        <p class="text-gray-400">Alinhamento e acabamento profissional.</p>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer class="text-center py-6 text-gray-400">
-    © 2026 • WZ Corte • Todos os direitos reservados
-  </footer>
 
 </body>
-</html></body>
 </html>
