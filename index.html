@@ -22,7 +22,7 @@
       padding: 25px;
       border-radius: 12px;
       width: 100%;
-      max-width: 420px;
+      max-width: 430px;
       box-shadow: 0 0 20px rgba(0,0,0,0.5);
     }
 
@@ -50,7 +50,7 @@
       border-radius: 8px;
       border: none;
       outline: none;
-      font-size: 16px;
+      font-size: 15px;
       margin-bottom: 20px;
     }
 
@@ -83,16 +83,30 @@
 
   <div class="container">
     <h1>WZ Corte</h1>
-    <p>Escolha seu corte e agende seu horário</p>
+    <p>Escolha o atendimento e agende seu horário</p>
 
-    <label for="corte">Selecione o corte</label>
-    <select id="corte">
-      <option value="">-- Escolha um corte --</option>
-      <option value="Corte degradê">Corte degradê</option>
-      <option value="Corte social">Corte social</option>
-      <option value="Corte + barba">Corte + barba</option>
-      <option value="Barba completa">Barba completa</option>
-      <option value="Nevou">Nevou</option>
+    <label for="servico">Selecione o serviço</label>
+    <select id="servico">
+      <option value="">-- Escolha um serviço --</option>
+
+      <!-- CORTES -->
+      <option data-tempo="30 minutos">Corte do Jaca - Low Fade</option>
+      <option data-tempo="30 minutos">Americano - Taper Fade</option>
+      <option data-tempo="30 minutos">Militar - High Fade</option>
+      <option data-tempo="30 minutos">Corte Degradê</option>
+      <option data-tempo="30 minutos">Corte Social</option>
+      <option data-tempo="30 minutos">Corte + Sobrancelha</option>
+
+      <!-- BARBA -->
+      <option data-tempo="45 minutos">Corte + Barba</option>
+
+      <!-- QUÍMICAS -->
+      <option data-tempo="1 hora e 40 minutos">Nevou</option>
+      <option data-tempo="1 hora e 40 minutos">Nevou + Branquim</option>
+      <option data-tempo="1 hora e 40 minutos">Pigmentação</option>
+      <option data-tempo="1 hora e 40 minutos">Colorimetria</option>
+      <option data-tempo="1 hora e 40 minutos">Reflexo Alinhado</option>
+      <option data-tempo="1 hora e 40 minutos">Luzes</option>
     </select>
 
     <button onclick="agendar()">
@@ -106,19 +120,28 @@
 
   <script>
     function agendar() {
-      const corte = document.getElementById("corte").value;
+      const select = document.getElementById("servico");
+      const servico = select.value;
+      const tempo = select.options[select.selectedIndex].getAttribute("data-tempo");
 
-      if (corte === "") {
-        alert("Por favor, escolha um corte antes de agendar.");
+      if (!servico) {
+        alert("Escolha um serviço antes de agendar.");
         return;
       }
 
-      const telefone = "5584999806570"; // coloque seu número aqui
-      const mensagem = `Olá! Gostaria de agendar um horário para o ${corte}.`;
+      const telefone = "5584987716386"; // NOVO NÚMERO
+      const mensagem =
+        `Olá! Gostaria de agendar um horário.\n\n` +
+        `Serviço: ${servico}\n` +
+        `Tempo estimado: ${tempo}`;
 
-      const url = `https://wa.me/${telefone}?text=${encodeURIComponent(mensagem)}`;
+      const url =
+        "https://api.whatsapp.com/send?phone=" +
+        telefone +
+        "&text=" +
+        encodeURIComponent(mensagem);
 
-      window.open(url, "_blank");
+      window.location.href = url;
     }
   </script>
 
