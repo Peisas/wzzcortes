@@ -71,7 +71,9 @@
       margin: 0 auto 20px;
     }
 
+    /* Estilização dos Inputs e Selects */
     .hero select,
+    .hero input,
     .hero button {
       width: 100%;
       max-width: 320px;
@@ -79,11 +81,18 @@
       display: block;
     }
 
-    select {
+    select, input {
       padding: 12px;
       border-radius: 8px;
       border: none;
       font-size: 15px;
+      background: #fff;
+      color: #333;
+    }
+    
+    input[type="date"] {
+      appearance: none;
+      -webkit-appearance: none;
     }
 
     button {
@@ -95,6 +104,11 @@
       font-size: 16px;
       font-weight: bold;
       cursor: pointer;
+      margin-top: 20px !important;
+    }
+    
+    button:hover {
+      background: #d4a835;
     }
 
     section {
@@ -143,7 +157,6 @@
 
 <header>
   <div class="logo">
-    <!-- Logo agora vem da pasta public -->
     <img src="src/public/logo.png" alt="Logo WZ Corte">
     <span>WZ CORTE</span>
   </div>
@@ -155,25 +168,44 @@
 
 <div class="hero">
   <h1>Estilo que chama <span>atenção</span></h1>
-  <p>Escolha o serviço abaixo e agende seu horário agora mesmo.</p>
+  <p>Escolha o serviço, a data e o horário abaixo e agende agora mesmo.</p>
 
   <select id="servico">
     <option value="">-- Selecione o serviço --</option>
-
-    <!-- CORTES -->
     <option data-preco="R$ 25,00" data-tempo="30 min">Corte Degradê - Low Fade - jaca</option>
-    <option data-preco="R$ 25,00" data-tempo="30 min">Corte Degradê - High Fade - militar - </option>
+    <option data-preco="R$ 25,00" data-tempo="30 min">Corte Degradê - High Fade - militar</option>
     <option data-preco="R$ 25,00" data-tempo="30 min">Taper Fade - americano</option>
     <option data-preco="R$ 25,00" data-tempo="30 min">Corte Social</option>
-
-    <!-- COMBOS -->
     <option data-preco="R$ 30,00" data-tempo="30 min">Corte + Sobrancelha</option>
     <option data-preco="R$ 40,00" data-tempo="45 min">Corte + Barba</option>
+    <option data-preco="A partir de R$ 80,00" data-tempo="1h40">Químicas (Nevou, Luzes, Pigmentação)</option>
+  </select>
 
-    <!-- QUÍMICAS -->
-    <option data-preco="A partir de R$ 80,00" data-tempo="1h40">
-      Químicas (Nevou, Luzes, Pigmentação)
-    </option>
+  <input type="date" id="data-agendamento" placeholder="Escolha a data">
+
+  <select id="horario">
+    <option value="">-- Selecione o horário --</option>
+    <option>08:30</option>
+    <option>09:00</option>
+    <option>09:30</option>
+    <option>10:00</option>
+    <option>10:30</option>
+    <option>11:00</option>
+    <option>11:30</option>
+    
+    <option>14:00</option>
+    <option>14:30</option>
+    <option>15:00</option>
+    <option>15:30</option>
+    <option>16:00</option>
+    <option>16:30</option>
+    <option>17:00</option>
+    <option>17:30</option>
+    <option>18:00</option>
+    <option>18:30</option>
+    <option>19:00</option>
+    <option>19:30</option>
+    <option>20:00</option>
   </select>
 
   <button onclick="agendar()">Agendar no WhatsApp</button>
@@ -181,18 +213,15 @@
 
 <section>
   <h2>Serviços</h2>
-
   <div class="cards">
     <div class="card">
       <h3>Cortes</h3>
       <p>Low fade, taper fade, high fade, degradê e social.</p>
     </div>
-
     <div class="card">
       <h3>Barba</h3>
       <p>Alinhamento e acabamento profissional.</p>
     </div>
-
     <div class="card">
       <h3>Químicas</h3>
       <p>Nevou, pigmentação, colorimetria, reflexo e luzes.</p>
@@ -205,23 +234,53 @@
 </footer>
 
 <script>
-  function agendar() {
-    const select = document.getElementById("servico");
-    const servico = select.value;
-    const preco = select.options[select.selectedIndex].getAttribute("data-preco");
-    const tempo = select.options[select.selectedIndex].getAttribute("data-tempo");
+  // Script para bloquear datas anteriores a hoje
+  window.onload = function() {
+    const dataInput = document.getElementById("data-agendamento");
+    const hoje = new Date().toISOString().split("T")[0];
+    dataInput.setAttribute("min", hoje);
+  };
 
+  function agendar() {
+    const selectServico = document.getElementById("servico");
+    const inputData = document.getElementById("data-agendamento");
+    const selectHorario = document.getElementById("horario");
+
+    const servico = selectServico.value;
+    const dataVal = inputData.value;
+    const horario = selectHorario.value;
+
+    // Validação
     if (!servico) {
-      alert("Selecione um serviço antes de agendar.");
+      alert("Por favor, selecione um serviço.");
+      return;
+    }
+    if (!dataVal) {
+      alert("Por favor, escolha uma data.");
+      return;
+    }
+    if (!horario) {
+      alert("Por favor, escolha um horário.");
       return;
     }
 
+    // Pega preço e tempo
+    const preco = selectServico.options[selectServico.selectedIndex].getAttribute("data-preco");
+    const tempo = selectServico.options[selectServico.selectedIndex].getAttribute("data-tempo");
+
+    // Formata a data para dia/mês/ano (padrão BR)
+    const dataFormatada = dataVal.split("-").reverse().join("/");
+
     const telefone = "5584987716386";
+    
+    // Monta a mensagem
     const mensagem =
       `Olá wisley! Gostaria de agendar um horário.\n\n` +
-      `Serviço: ${servico}\n` +
-      `Tempo: ${tempo}\n` +
-      `Valor: ${preco}`;
+      `🗓 *Data:* ${dataFormatada}\n` +
+      `⏰ *Horário:* ${horario}\n` +
+      `✂️ *Serviço:* ${servico}\n` +
+      `💰 *Valor:* ${preco}\n` +
+      `⏳ *Tempo Estimado:* ${tempo}`;
 
     window.location.href =
       "https://api.whatsapp.com/send?phone=" +
