@@ -50,9 +50,27 @@
       font-size: 14px;
     }
 
+    /* ===== HERO / AGENDA COM FUNDO ===== */
     .hero {
+      position: relative;
       text-align: center;
-      padding: 60px 20px 40px;
+      padding: 70px 20px 50px;
+      background:
+        linear-gradient(rgba(2,6,20,0.85), rgba(2,6,20,0.85)),
+        url("src/public/fundo-barbearia.jpg") center/cover no-repeat;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      backdrop-filter: blur(4px);
+      z-index: 0;
+    }
+
+    .hero * {
+      position: relative;
+      z-index: 1;
     }
 
     .hero h1 {
@@ -65,13 +83,12 @@
     }
 
     .hero p {
-      opacity: 0.8;
+      opacity: 0.85;
       font-size: 14px;
       max-width: 420px;
       margin: 0 auto 20px;
     }
 
-    /* Estilização dos Inputs e Selects */
     .hero select,
     .hero input,
     .hero button {
@@ -86,10 +103,10 @@
       border-radius: 8px;
       border: none;
       font-size: 15px;
-      background: #fff;
+      background: rgba(255,255,255,0.95);
       color: #333;
     }
-    
+
     input[type="date"] {
       appearance: none;
       -webkit-appearance: none;
@@ -106,7 +123,7 @@
       cursor: pointer;
       margin-top: 20px !important;
     }
-    
+
     button:hover {
       background: #d4a835;
     }
@@ -153,6 +170,7 @@
     }
   </style>
 </head>
+
 <body>
 
 <header>
@@ -172,40 +190,26 @@
 
   <select id="servico">
     <option value="">-- Selecione o serviço --</option>
-    <option data-preco="R$ 25,00" data-tempo="30 min">Corte Degradê - Low Fade - jaca</option>
-    <option data-preco="R$ 25,00" data-tempo="30 min">Corte Degradê - High Fade - militar</option>
-    <option data-preco="R$ 25,00" data-tempo="30 min">Taper Fade - americano</option>
+    <option data-preco="R$ 25,00" data-tempo="30 min">Corte Degradê - Low Fade</option>
+    <option data-preco="R$ 25,00" data-tempo="30 min">Corte Degradê - High Fade</option>
+    <option data-preco="R$ 25,00" data-tempo="30 min">Taper Fade</option>
     <option data-preco="R$ 25,00" data-tempo="30 min">Corte Social</option>
     <option data-preco="R$ 30,00" data-tempo="30 min">Corte + Sobrancelha</option>
     <option data-preco="R$ 40,00" data-tempo="45 min">Corte + Barba</option>
-    <option data-preco="A partir de R$ 80,00" data-tempo="1h40">Químicas (Nevou, Luzes, Pigmentação)</option>
+    <option data-preco="A partir de R$ 80,00" data-tempo="1h40">Químicas</option>
   </select>
 
-  <input type="date" id="data-agendamento" placeholder="Escolha a data">
+  <input type="date" id="data-agendamento">
 
   <select id="horario">
     <option value="">-- Selecione o horário --</option>
-    <option>08:30</option>
-    <option>09:00</option>
-    <option>09:30</option>
-    <option>10:00</option>
-    <option>10:30</option>
-    <option>11:00</option>
-    <option>11:30</option>
-    
-    <option>14:00</option>
-    <option>14:30</option>
-    <option>15:00</option>
-    <option>15:30</option>
-    <option>16:00</option>
-    <option>16:30</option>
-    <option>17:00</option>
-    <option>17:30</option>
-    <option>18:00</option>
-    <option>18:30</option>
-    <option>19:00</option>
-    <option>19:30</option>
-    <option>20:00</option>
+    <option>08:30</option><option>09:00</option><option>09:30</option>
+    <option>10:00</option><option>10:30</option><option>11:00</option>
+    <option>11:30</option><option>14:00</option><option>14:30</option>
+    <option>15:00</option><option>15:30</option><option>16:00</option>
+    <option>16:30</option><option>17:00</option><option>17:30</option>
+    <option>18:00</option><option>18:30</option><option>19:00</option>
+    <option>19:30</option><option>20:00</option>
   </select>
 
   <button onclick="agendar()">Agendar no WhatsApp</button>
@@ -224,7 +228,7 @@
     </div>
     <div class="card">
       <h3>Químicas</h3>
-      <p>Nevou, pigmentação, colorimetria, reflexo e luzes.</p>
+      <p>Nevou, pigmentação, luzes e reflexo.</p>
     </div>
   </div>
 </section>
@@ -234,7 +238,6 @@
 </footer>
 
 <script>
-  // Script para bloquear datas anteriores a hoje
   window.onload = function() {
     const dataInput = document.getElementById("data-agendamento");
     const hoje = new Date().toISOString().split("T")[0];
@@ -242,51 +245,31 @@
   };
 
   function agendar() {
-    const selectServico = document.getElementById("servico");
-    const inputData = document.getElementById("data-agendamento");
-    const selectHorario = document.getElementById("horario");
+    const servico = document.getElementById("servico");
+    const data = document.getElementById("data-agendamento").value;
+    const horario = document.getElementById("horario").value;
 
-    const servico = selectServico.value;
-    const dataVal = inputData.value;
-    const horario = selectHorario.value;
-
-    // Validação
-    if (!servico) {
-      alert("Por favor, selecione um serviço.");
-      return;
-    }
-    if (!dataVal) {
-      alert("Por favor, escolha uma data.");
-      return;
-    }
-    if (!horario) {
-      alert("Por favor, escolha um horário.");
+    if (!servico.value || !data || !horario) {
+      alert("Preencha todos os campos.");
       return;
     }
 
-    // Pega preço e tempo
-    const preco = selectServico.options[selectServico.selectedIndex].getAttribute("data-preco");
-    const tempo = selectServico.options[selectServico.selectedIndex].getAttribute("data-tempo");
+    const preco = servico.options[servico.selectedIndex].dataset.preco;
+    const tempo = servico.options[servico.selectedIndex].dataset.tempo;
+    const dataFormatada = data.split("-").reverse().join("/");
 
-    // Formata a data para dia/mês/ano (padrão BR)
-    const dataFormatada = dataVal.split("-").reverse().join("/");
+    const msg =
+`Olá Wisley! Gostaria de agendar um horário.
 
-    const telefone = "5584987716386";
-    
-    // Monta a mensagem
-    const mensagem =
-      `Olá wisley! Gostaria de agendar um horário.\n\n` +
-      `🗓 *Data:* ${dataFormatada}\n` +
-      `⏰ *Horário:* ${horario}\n` +
-      `✂️ *Serviço:* ${servico}\n` +
-      `💰 *Valor:* ${preco}\n` +
-      `⏳ *Tempo Estimado:* ${tempo}`;
+🗓 Data: ${dataFormatada}
+⏰ Horário: ${horario}
+✂️ Serviço: ${servico.value}
+💰 Valor: ${preco}
+⏳ Tempo: ${tempo}`;
 
     window.location.href =
-      "https://api.whatsapp.com/send?phone=" +
-      telefone +
-      "&text=" +
-      encodeURIComponent(mensagem);
+      "https://api.whatsapp.com/send?phone=5584987716386&text=" +
+      encodeURIComponent(msg);
   }
 </script>
 
